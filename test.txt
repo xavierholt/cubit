@@ -1,0 +1,17 @@
+Class: Type(Thing) {
+  $NAME := "Class"
+
+  rw @name: String
+
+  $new: (name = "bob") -> Self {
+    Self.allocate.init(name)
+  }
+
+  $init: (self, name: String) -> Self {
+    @name = name
+  }
+
+  $bob?: (self) -> Bool {
+    @name == "bob"
+  }
+}

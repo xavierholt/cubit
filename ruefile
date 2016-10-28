@@ -1,0 +1,10 @@
+Rue.project do |cubit|
+  # cubit.logger.level = Logger::DEBUG
+  cubit[:cpp][:flags] += ' -std=c++11 -Wall -Werror'
+
+  cubit.build 'debug' do
+    cubit[:cpp][:flags] += ' -g'
+  end
+
+  cubit.target 'main.out', :srcdir => 'src'
+end

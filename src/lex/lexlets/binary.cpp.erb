@@ -1,0 +1,17 @@
+% require_relative 'operators'
+#include "all.h"
+#include "../../ast/binary.h"
+
+AST::Node* OperatorLexlet::binary(Lexer& lexer) const {
+  switch(lexer.peek()) {
+% $B.group_by {|k, v| k[0]}.each do |c, o|
+    case '<%= c.dump[1..-2] %>':
+%   o.sort_by {|a, b| -a.length}.each do |k, v|
+      if(lexer.take(<%= k.dump %>)) return new AST::Binary(lexer, <%= k.dump %>, <%= v %>);
+%   end
+      break;
+% end
+  }
+
+  return nullptr;
+}
