@@ -2,6 +2,7 @@
 
 #include "lexer.h"
 #include "parser.h"
+#include "chars/all.h"
 #include "../ast/node.h"
 
 #include <iomanip>
@@ -14,7 +15,7 @@ LexError::LexError(const Lexer& lexer, const std::string& what): mWhat(prefix(le
 
 std::string LexError::charinfo(char c) {
   std::stringstream s;
-  s << '\'' << Lexer::cname(c) << "' (0x" << std::hex << std::setfill('0') << std::setw(2) << int(c) << ')';
+  s << '\'' << Char::name(c) << "' (0x" << std::hex << std::setfill('0') << std::setw(2) << int(c) << ')';
   return s.str();
 }
 

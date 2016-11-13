@@ -2,5 +2,5 @@
 #include "all.h"
 
 const unsigned char Char::FLAGS[128] = {
-<%= (0...128).map {|c| "    /* %3s %3s */ %s" % [c, txt(c), $flags[c]]}.join(",\n") %>
+<%= (0...128).map {|c| "  /* %3s %3s */ %s" % [c, txt(c), $flags[c]]}.join(",\n") %>
 };

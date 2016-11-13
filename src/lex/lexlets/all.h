@@ -28,6 +28,10 @@ class NewlineLexlet: public Lexlet {
   void lex(Lexer& lexer) const;
 };
 
+class NumberLexlet: public Lexlet {
+  void lex(Lexer& lexer) const;
+};
+
 class OperatorLexlet: public Lexlet {
   void lex(Lexer& lexer) const;
 };

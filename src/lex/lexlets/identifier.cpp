@@ -1,17 +1,18 @@
 #include "all.h"
 
 #include "../error.h"
+#include "../chars/all.h"
 #include "../../ast/identifier.h"
 
 #include <sstream>
 
 void IdentifierLexlet::lex(Lexer& lexer) const {
-  if(Lexer::ctype(lexer.peek()) != Lexer::IDENTIFIER) {
+  if(Char::type(lexer.peek()) != Char::IDENTIFIER) {
     throw LexError::expected(lexer, "identifier");
   }
 
   std::stringstream text;
-  while(Lexer::ctype(lexer.peek()) == Lexer::IDENTIFIER) {
+  for(int c = lexer.peek(); Char::flags(c); c = lexer.peek()) {
     text << (char) lexer.take();
   }
 

@@ -4,8 +4,8 @@
 #include "lexlets/all.h"
 #include "../ast/bracket.h"
 
-// Keys are looked up in Char::TYPES:
-const Lexlet* Lexer::LEXLETS[8] = {
+// Keys are from Char::type(c):
+static const Lexlet* LEXLETS[9] = {
   new BracketLexlet,
   new CommentLexlet,
   new SpaceLexlet,
@@ -13,22 +13,9 @@ const Lexlet* Lexer::LEXLETS[8] = {
   new NewlineLexlet,
   new OperatorLexlet,
   new StringLexlet,
+  new NumberLexlet,
   new InvalidLexlet
 };
-
-const char* Lexer::cname(char c) {
-  if(c < 0 || c > 127) return "???";
-  return Char::NAMES[(int) c];
-}
-
-const char Lexer::ctype(char c) {
-  if(c < 0 || c > 127) return INVALID;
-  return Char::TYPES[(int) c];
-}
-
-const Lexlet* Lexer::lexlet(char c) {
-  return LEXLETS[(int) ctype(c)];
-}
 
 Lexer::Lexer(std::istream& input, const std::string& filename): mFilename(filename), mTokens() {
   input.seekg(0, input.end);
@@ -87,11 +74,8 @@ void Lexer::indent(int dent) {
 }
 
 void Lexer::lex() {
-  // *this << new AST::LBracket(*this, "[+]", "[-]");
-
-  while(!peek(EOF)) {
-    const Lexlet* l = lexlet(peek());
-    l->lex(*this);
+  for(int c = peek(); c != EOF; c = peek()) {
+    LEXLETS[Char::type(c)]->lex(*this);
   }
 
   *this << new AST::RBracket(*this, "[-]");
@@ -106,7 +90,7 @@ int Lexer::peek() const {
 }
 
 bool Lexer::peek(int c) const {
-  return c == peek();
+  return (c == peek());
 }
 
 int Lexer::take() {

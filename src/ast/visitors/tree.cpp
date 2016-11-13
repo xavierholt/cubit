@@ -3,6 +3,7 @@
 #include "../identifier.h"
 #include "../bracket.h"
 #include "../node.h"
+#include "../number.h"
 #include "../operator.h"
 #include "../string.h"
 
@@ -44,6 +45,10 @@ namespace AST
     visit(node->lhs());
     visit(node->rhs());
     mDepth -= 1;
+  }
+
+  void TreePrinter::visit(AST::Number* node) {
+    print(node, mDepth);
   }
 
   void TreePrinter::visit(AST::Prefix* node) {

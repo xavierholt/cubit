@@ -7,8 +7,10 @@
 #include <iomanip>
 #include <iostream>
 
-int main() {
-  std::string filename("test.txt");
+int main(int argc, char* argv[]) {
+  const char* fn = (argc == 2)? argv[1] : "test.txt";
+  std::string filename(fn);
+
   std::ifstream f(filename);
   Lexer lexer(f, filename);
   lexer.lex();

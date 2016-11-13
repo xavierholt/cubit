@@ -1,5 +1,6 @@
 Class: Type(Thing) {
-  $NAME := "Class"
+  $NAME := "Dmitri"
+  $PIE  := 3.14159
 
   rw @name: String
 

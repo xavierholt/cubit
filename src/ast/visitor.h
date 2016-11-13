@@ -7,6 +7,7 @@ namespace AST
   class Identifier;
   class LBracket;
   class Node;
+  class Number;
   class Prefix;
   class String;
 
@@ -23,6 +24,10 @@ namespace AST
     }
 
     virtual void visit(AST::LBracket* node) {
+      visit((AST::Node*) node);
+    }
+
+    virtual void visit(AST::Number* node) {
       visit((AST::Node*) node);
     }
 
