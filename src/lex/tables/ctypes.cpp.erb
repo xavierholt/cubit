@@ -1,6 +1,0 @@
-<% require_relative 'chars' -%>
-#include "../lexer.h"
-
-const char Lexer::CTYPES[128] = {
-<%= (0...128).map {|c| "  /* %3s %3s */ %s" % [c, txt(c), $table[c]]}.join(",\n") %>
-};

@@ -2,7 +2,6 @@
 
 #include "../error.h"
 #include "../ops/operator.h"
-#include "../ops/trie.h"
 #include "../../ast/bracket.h"
 #include "../../ast/operator.h"
 

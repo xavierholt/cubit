@@ -7,8 +7,8 @@
 
 void StringLexlet::lex(Lexer& lexer) const {
   std::stringstream text;
-  char initial = lexer.take();
-  text << initial;
+  int initial = lexer.take();
+  text << (char) initial;
 
   while(true) {
     int c = lexer.take();
@@ -19,8 +19,7 @@ void StringLexlet::lex(Lexer& lexer) const {
       return;
     }
     else if(c == '\\') {
-      char next = lexer.take();
-      switch(next) {
+      switch(lexer.take()) {
         case '0':  text << '\0'; break;
         case 'a':  text << '\a'; break;
         case 'b':  text << '\b'; break;
@@ -36,7 +35,7 @@ void StringLexlet::lex(Lexer& lexer) const {
         default: throw LexError(lexer, "Unrecognized escape sequence!");
       }
     }
-    else if(c == '\0') {
+    else if(c == EOF) {
       throw LexError(lexer, "Unterminated string!");
     }
     else {

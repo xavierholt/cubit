@@ -1,6 +1,6 @@
-#include "../lexer.h"
+#include "all.h"
 
-const char Lexer::CNAMES[128][4] = {
+const char Char::NAMES[128][4] = {
   /*   0 */ "NUL",
   /*   1 */ "SOH",
   /*   2 */ "STX",

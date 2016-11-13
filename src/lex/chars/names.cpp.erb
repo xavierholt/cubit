@@ -1,0 +1,6 @@
+% require_relative 'chars'
+#include "all.h"
+
+const char Char::NAMES[128][4] = {
+<%= (0...128).map {|c| "  /* %3s */ %s" % [c, txt(c).inspect]}.join(",\n") %>
+};

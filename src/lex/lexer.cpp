@@ -1,16 +1,29 @@
 #include "lexer.h"
 
+#include "chars/all.h"
 #include "lexlets/all.h"
 #include "../ast/bracket.h"
 
+// Keys are looked up in Char::TYPES:
+const Lexlet* Lexer::LEXLETS[8] = {
+  new BracketLexlet,
+  new CommentLexlet,
+  new SpaceLexlet,
+  new IdentifierLexlet,
+  new NewlineLexlet,
+  new OperatorLexlet,
+  new StringLexlet,
+  new InvalidLexlet
+};
+
 const char* Lexer::cname(char c) {
   if(c < 0 || c > 127) return "???";
-  return CNAMES[(int) c];
+  return Char::NAMES[(int) c];
 }
 
 const char Lexer::ctype(char c) {
   if(c < 0 || c > 127) return INVALID;
-  return CTYPES[(int) c];
+  return Char::TYPES[(int) c];
 }
 
 const Lexlet* Lexer::lexlet(char c) {
