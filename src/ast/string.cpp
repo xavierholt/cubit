@@ -2,10 +2,6 @@
 
 namespace AST
 {
-  String::String(const Lexer& lexer): Node(lexer) {
-    // All done.
-  }
-
   String::String(const Lexer& lexer, const std::string& text): Node(lexer, text) {
     // All done.
   }

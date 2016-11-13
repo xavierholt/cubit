@@ -1,24 +1,31 @@
 #include "all.h"
 
 #include "../error.h"
+#include "../../ast/operator.h"
+#include "../ops/operator.h"
+#include "../ops/trie.h"
 
 void OperatorLexlet::lex(Lexer& lexer) const {
-  AST::Node* op;
+  const Trie* node = Operator::get(lexer);
+  const Operator* binary = node->binary();
+  const Operator* prefix = node->prefix();
+
   if(lexer.flags() & Lexer::FVALUE) {
-    if((op = binary(lexer))) {
-      lexer << op;
-      lexer.clear();
-      return;
+    if(binary == nullptr) {
+      throw LexError::expected(lexer, "binary operator");
     }
 
-    /* tokens << new Call; <<*/
-  }
-
-  if((op = unary(lexer))) {
-    lexer << op;
+    lexer << new AST::Binary(lexer, binary);;
     lexer.clear();
     return;
   }
+  else {
+    if(prefix == nullptr) {
+      throw LexError::expected(lexer, "prefix operator");
+    }
 
-  throw LexError::expected(lexer, "operator");
+    lexer << new AST::Prefix(lexer, prefix);
+    lexer.clear();
+    return;
+  }
 }

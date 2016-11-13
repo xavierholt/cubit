@@ -1,4 +1,4 @@
-#include "../lexlets/all.h"
+#include "../lexer.h"
 
 const char Lexer::CTYPES[128] = {
   /*   0 NUL */ Lexer::INVALID,

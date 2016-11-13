@@ -7,8 +7,8 @@ namespace AST
   class Identifier;
   class LBracket;
   class Node;
+  class Prefix;
   class String;
-  class Unary;
 
   class Visitor {
   public:
@@ -26,11 +26,11 @@ namespace AST
       visit((AST::Node*) node);
     }
 
-    virtual void visit(AST::String* node) {
+    virtual void visit(AST::Prefix* node) {
       visit((AST::Node*) node);
     }
 
-    virtual void visit(AST::Unary* node) {
+    virtual void visit(AST::String* node) {
       visit((AST::Node*) node);
     }
   };

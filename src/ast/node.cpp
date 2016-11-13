@@ -5,10 +5,6 @@
 
 namespace AST
 {
-  Node::Node(const Lexer& lexer): Node(lexer, lexer.text()) {
-    // All done.
-  }
-
   Node::Node(const Lexer& lexer, const std::string& text): mText(text) {
     mRow = lexer.line();
     mCol = lexer.column();

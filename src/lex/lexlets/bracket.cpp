@@ -1,8 +1,7 @@
 #include "all.h"
 
 #include "../error.h"
-#include "../../ast/rbracket.h"
-#include "../../ast/lbracket.h"
+#include "../../ast/bracket.h"
 
 void BracketLexlet::lex(Lexer& lexer) const {
   switch(lexer.take()) {
@@ -19,15 +18,15 @@ void BracketLexlet::lex(Lexer& lexer) const {
     lexer.clear();
     break;
   case ']':
-    lexer << new AST::RBracket(lexer);
+    lexer << new AST::RBracket(lexer, "]");
     lexer.clear(Lexer::FVALUE);
     break;
   case '}':
-    lexer << new AST::RBracket(lexer);
+    lexer << new AST::RBracket(lexer, "}");
     lexer.clear(Lexer::FVALUE);
     break;
   case ')':
-    lexer << new AST::RBracket(lexer);
+    lexer << new AST::RBracket(lexer, ")");
     lexer.clear(Lexer::FVALUE);
     break;
   default:

@@ -8,8 +8,9 @@ void CommentLexlet::lex(Lexer& lexer) const {
   }
 
   while(true) {
-    if(lexer.peek('\n')) break;
-    if(lexer.peek('\0')) break;
+    int c = lexer.peek();
+    if(c == '\n') break;
+    if(c ==  EOF) break;
     lexer.take();
   }
 

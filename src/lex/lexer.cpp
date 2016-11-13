@@ -1,26 +1,16 @@
 #include "lexer.h"
 
 #include "lexlets/all.h"
-#include "../ast/end.h"
-
-#include <cstring>
+#include "../ast/bracket.h"
 
 const char* Lexer::cname(char c) {
-  if(c < 0 || c > 127) {
-    return "???";
-  }
-  else {
-    return CNAMES[(int) c];
-  }
+  if(c < 0 || c > 127) return "???";
+  return CNAMES[(int) c];
 }
 
 const char Lexer::ctype(char c) {
-  if(c < 0 || c > 127) {
-    return INVALID;
-  }
-  else {
-    return CTYPES[(int) c];
-  }
+  if(c < 0 || c > 127) return INVALID;
+  return CTYPES[(int) c];
 }
 
 const Lexlet* Lexer::lexlet(char c) {
@@ -84,64 +74,61 @@ void Lexer::indent(int dent) {
 }
 
 void Lexer::lex() {
-  while(!peek('\0')) {
+  // *this << new AST::LBracket(*this, "[+]", "[-]");
+
+  while(!peek(EOF)) {
     const Lexlet* l = lexlet(peek());
     l->lex(*this);
   }
 
-  *this << new AST::EndOfInput(*this);
+  *this << new AST::RBracket(*this, "[-]");
 }
 
 int Lexer::line() const {
   return mSavedLine;
 }
 
-char Lexer::peek() const {
-  return *mLatest;
+int Lexer::peek() const {
+  return (mLatest < mLength)? mLatest[0] : EOF;
 }
 
-bool Lexer::peek(char c) const {
-  return (*mLatest == c);
+bool Lexer::peek(int c) const {
+  return c == peek();
 }
 
-char Lexer::take() {
-  char c = *mLatest;
-  mLatest += (mLatest < mLength);
+int Lexer::take() {
+  if(mLatest < mLength) {
+    int c = *mLatest;
+    mLatest += 1;
 
-  if(c == '\n') {
-    mLine  += 1;
-    mColumn = 1;
+    if(c == '\n') {
+      mLine   += 1;
+      mColumn  = 1;
+    }
+    else {
+      mColumn += 1;
+    }
+
+    return c;
   }
   else {
-    mColumn += 1;
+    return EOF;
   }
-
-  return c;
 }
 
-bool Lexer::take(char c) {
+bool Lexer::take(int c) {
   bool m = peek(c);
   if(m) take();
   return m;
 }
 
-bool Lexer::take(const char* s) {
-  int  l = strlen(s);
-  bool m = (strncmp(s, mLatest, l) == 0);
-  if(m) {
-    mColumn += l;
-    mLatest += l;
-  }
-
-  return m;
-}
-
-std::string Lexer::text() const {
-  return std::string(mAnchor, mLatest);
-}
-
 Tokens& Lexer::tokens() {
   return mTokens;
+}
+
+void Lexer::undo() {
+  mLatest -= 1;
+  mColumn -= 1;
 }
 
 Lexer& Lexer::operator << (AST::Node* node) {

@@ -29,9 +29,7 @@ class NewlineLexlet: public Lexlet {
 };
 
 class OperatorLexlet: public Lexlet {
-  void       lex(Lexer& lexer) const;
-  AST::Node* binary(Lexer& lexer) const;
-  AST::Node* unary(Lexer& lexer) const;
+  void lex(Lexer& lexer) const;
 };
 
 class SpaceLexlet: public Lexlet {

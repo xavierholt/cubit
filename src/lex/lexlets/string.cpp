@@ -11,9 +11,9 @@ void StringLexlet::lex(Lexer& lexer) const {
   text << initial;
 
   while(true) {
-    char c = lexer.take();
+    int c = lexer.take();
     if(c == initial) {
-      text  << c;
+      text  << (char) c;
       lexer << new AST::String(lexer, text.str());
       lexer.clear(Lexer::FVALUE);
       return;
@@ -40,7 +40,7 @@ void StringLexlet::lex(Lexer& lexer) const {
       throw LexError(lexer, "Unterminated string!");
     }
     else {
-      text << c;
+      text << (char) c;
     }
   }
 }

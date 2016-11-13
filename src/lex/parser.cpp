@@ -3,18 +3,13 @@
 #include "../ast/node.h"
 #include "lexer.h"
 
-#include <iostream>
-
 Parser::Parser(Tokens& tokens): mTokens(tokens) {
   mCurrent = 0;
 }
 
 AST::Node* Parser::parse(int rbp) {
-  AST::Node* node = take();
-  std::cout << node->text() << " -> nud()\n";
-  node = node->nud(*this);
+  AST::Node* node = take()->nud(*this);
   while(rbp < peek()->lbp()) {
-    std::cout << peek()->text() << " -> led(" << node->text() << ")\n";
     node = take()->led(*this, node);
   }
 
@@ -22,22 +17,14 @@ AST::Node* Parser::parse(int rbp) {
 }
 
 AST::Node* Parser::peek() const {
-  if(mCurrent < mTokens.size()) {
-    return mTokens[mCurrent];
-  }
-  else {
-    return nullptr;
-  }
+  return mTokens[mCurrent];
 }
 
 AST::Node* Parser::take() {
-  AST::Node* node = peek();
-  mCurrent += (node != nullptr);
-  return node;
+  return mTokens[mCurrent++];
 }
 
 AST::Node* Parser::take(const std::string& text) {
-  AST::Node* node = peek();
-  if(node && node->text() == text) return take();
+  if(peek()->text() == text) return take();
   return nullptr;
 }

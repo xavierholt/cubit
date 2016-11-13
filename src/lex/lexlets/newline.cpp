@@ -1,9 +1,10 @@
 #include "all.h"
 
 #include "../error.h"
-#include "../../ast/binary.h"
-#include "../../ast/lbracket.h"
-#include "../../ast/rbracket.h"
+#include "../ops/operator.h"
+#include "../ops/trie.h"
+#include "../../ast/bracket.h"
+#include "../../ast/operator.h"
 
 void NewlineLexlet::lex(Lexer& lexer) const {
   if(!lexer.take('\n')) {
@@ -12,9 +13,11 @@ void NewlineLexlet::lex(Lexer& lexer) const {
 
   int dent = 0;
   while(lexer.take(' ')) ++dent;
-  if(lexer.peek('#' )) return;
-  if(lexer.peek('\n')) return;
-  if(lexer.peek('\0')) return;
+
+  int c = lexer.peek();
+  if(c ==  '#') return;
+  if(c == '\n') return;
+  if(c ==  EOF) return;
 
   if(dent > lexer.dent()) {
     lexer << new AST::LBracket(lexer, "[>]", "[<]");
@@ -22,7 +25,7 @@ void NewlineLexlet::lex(Lexer& lexer) const {
     lexer.clear();
   }
   else if(dent == lexer.dent()) {
-    lexer << new AST::Binary(lexer, "[ ]", 55, false);
+    lexer << new AST::Binary(lexer, Operator::NEWLINE);
     lexer.clear();
   }
   else {

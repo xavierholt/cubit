@@ -1,4 +1,4 @@
-#include "../lexlets/all.h"
+#include "../lexer.h"
 
 const char Lexer::CNAMES[128][4] = {
   /*   0 */ "NUL",

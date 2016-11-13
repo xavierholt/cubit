@@ -54,7 +54,6 @@ public:
   ~Lexer();
 
   const std::string& filename() const;
-  std::string        text()     const;
   Tokens&            tokens();
 
   void clear(char flags = 0);
@@ -65,11 +64,11 @@ public:
   void indent(int dent);
   void lex();
   int  line()       const;
-  char peek()       const;
-  bool peek(char c) const;
-  char take();
-  bool take(char c);
-  bool take(const char* c);
+  int  peek()       const;
+  bool peek(int c)  const;
+  int  take();
+  bool take(int c);
+  void undo();
 
   Lexer& operator << (AST::Node*);
 };

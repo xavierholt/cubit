@@ -25,6 +25,17 @@ namespace AST
   protected:
     void take(Parser& parser) const;
   };
+
+  class RBracket: public Node {
+  public:
+    RBracket(const Lexer& lexer, const std::string& text);
+
+    Node* led(Parser& parser, Node* lhs);
+    Node* nud(Parser& parser);
+    void  send(Visitor*);
+
+    const std::string& type() const;
+  };
 }
 
 #endif

@@ -17,8 +17,8 @@ namespace AST
     void visit(AST::Binary*     node);
     void visit(AST::Identifier* node);
     void visit(AST::LBracket*   node);
+    void visit(AST::Prefix*     node);
     void visit(AST::String*     node);
-    void visit(AST::Unary*      node);
   };
 }
 

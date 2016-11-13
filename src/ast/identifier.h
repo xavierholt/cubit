@@ -7,7 +7,6 @@ namespace AST
 {
   class Identifier: public Node {
   public:
-    Identifier(const Lexer& lexer);
     Identifier(const Lexer& lexer, const std::string& text);
 
     void send(Visitor* visitor);

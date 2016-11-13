@@ -1,11 +1,10 @@
 #include "tree.h"
 
-#include "../binary.h"
 #include "../identifier.h"
-#include "../lbracket.h"
+#include "../bracket.h"
 #include "../node.h"
+#include "../operator.h"
 #include "../string.h"
-#include "../unary.h"
 
 #include <iostream>
 
@@ -47,15 +46,15 @@ namespace AST
     mDepth -= 1;
   }
 
-  void TreePrinter::visit(AST::String* node) {
-    print(node, mDepth);
-  }
-
-  void TreePrinter::visit(AST::Unary* node) {
+  void TreePrinter::visit(AST::Prefix* node) {
     print(node, mDepth);
 
     mDepth += 1;
     visit(node->rhs());
     mDepth -= 1;
+  }
+
+  void TreePrinter::visit(AST::String* node) {
+    print(node, mDepth);
   }
 }

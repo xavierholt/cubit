@@ -2,6 +2,8 @@
 #define CUBIT_AST_NODE_H
 
 #include <string>
+#include <ostream>
+
 #include "visitor.h"
 
 class Lexer;
@@ -15,7 +17,6 @@ namespace AST
     int mRow;
     int mCol;
   public:
-    Node(const Lexer& lexer);
     Node(const Lexer& lexer, const std::string& text);
 
     int row() const;
@@ -29,6 +30,10 @@ namespace AST
 
     virtual const std::string& text() const;
     virtual const std::string& type() const = 0;
+
+    friend std::ostream& operator << (std::ostream& o, const Node& node) {
+      return o << node.type() << " (" << node.text() << ") at " << node.row() << ":" << node.col();
+    }
   };
 }
 
