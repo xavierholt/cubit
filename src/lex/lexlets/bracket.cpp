@@ -4,32 +4,15 @@
 #include "../../ast/bracket.h"
 
 void BracketLexlet::lex(Lexer& lexer) const {
-  switch(lexer.take()) {
-  case '(':
-    lexer << new AST::LBracket(lexer, "(", ")");
-    lexer.clear();
-    break;
-  case '{':
-    lexer << new AST::LBracket(lexer, "{", "}");
-    lexer.clear();
-    break;
-  case '[':
-    lexer << new AST::LBracket(lexer, "[", "]");
-    lexer.clear();
-    break;
-  case ']':
-    lexer << new AST::RBracket(lexer, "]");
-    lexer.clear(Lexer::FVALUE);
-    break;
-  case '}':
-    lexer << new AST::RBracket(lexer, "}");
-    lexer.clear(Lexer::FVALUE);
-    break;
-  case ')':
-    lexer << new AST::RBracket(lexer, ")");
-    lexer.clear(Lexer::FVALUE);
-    break;
-  default:
+  if(Char::type(lexer.peek()) != Char::BRACKET) {
     throw LexError::expected(lexer, "bracket");
   }
+
+  switch(lexer.take()) {
+    case '(': lexer << new AST::Bracket(lexer, "(", ")"); break;
+    case '{': lexer << new AST::Bracket(lexer, "{", "}"); break;
+    case '[': lexer << new AST::Bracket(lexer, "[", "]"); break;
+  }
+
+  lexer.clear();
 }

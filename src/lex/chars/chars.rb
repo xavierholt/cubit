@@ -23,7 +23,7 @@ set "ghijklmnopqrstuvwxyz",   "IDENTIFIER", "0   | 0   | 0   | 0   | 0     | LOC
 set " ",                      "SPACE"
 set "\n",                     "NEWLINE"
 set "~!@$%^&*-+=|\\:;<,>.?/", "OPERATOR"
-set "[({})]",                 "BRACKET"
+set "[({})]",                 "OPERATOR"
 set "#",                      "COMMENT"
 set "\"'`",                   "QUOTE"
 

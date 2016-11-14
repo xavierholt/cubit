@@ -1,20 +1,21 @@
-#ifndef CUBIT_AST_NUMBER_H
-#define CUBIT_AST_NUMBER_H
+#ifndef CUBIT_AST_SYMBOL_H
+#define CUBIT_AST_SYMBOL_H
 
 #include "node.h"
 
+class Operator;
+
 namespace AST
 {
-  class Number: public Node {
-  protected:
-    long long int mValue;
+  class Symbol: public Node {
   public:
-    Number(const Lexer& lexer, const std::string& text);
+    Symbol(const Lexer& lexer, const std::string& text);
 
     Node* led(Parser& parser, Node* lhs);
     Node* nud(Parser& parser);
 
     void send(Visitor* visitor);
+
     const std::string& type() const;
   };
 }

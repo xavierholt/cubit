@@ -1,7 +1,6 @@
 #include "node.h"
 
 #include "../lex/lexer.h"
-#include "../lex/parser.h"
 
 namespace AST
 {
@@ -16,14 +15,6 @@ namespace AST
 
   int Node::lbp() const {
     return 0;
-  }
-
-  AST::Node* Node::led(Parser& parser, AST::Node* lhs) {
-    return this;
-  }
-
-  AST::Node* Node::nud(Parser& parser) {
-    return this;
   }
 
   int Node::rbp() const {

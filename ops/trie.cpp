@@ -6,6 +6,7 @@
 Trie::Trie(): mChildren() {
   mBinary = nullptr;
   mPrefix = nullptr;
+  mSymbol = nullptr;
 }
 
 void Trie::add(Operator* op) {
@@ -25,8 +26,11 @@ void Trie::add(Operator* op) {
   if(op->binary()) {
     trie->mBinary = op;
   }
-  else {
+  else if(op->prefix()) {
     trie->mPrefix = op;
+  }
+  else {
+    trie->mSymbol = op;
   }
 }
 
@@ -63,4 +67,8 @@ const Trie* Trie::get(const std::string& text) const {
 
 const Operator* Trie::prefix() const {
   return mPrefix;
+}
+
+const Operator* Trie::symbol() const {
+  return mSymbol;
 }

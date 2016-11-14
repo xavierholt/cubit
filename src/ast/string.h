@@ -9,8 +9,10 @@ namespace AST
   public:
     String(const Lexer& lexer, const std::string& text);
 
-    void send(Visitor* visitor);
+    Node* led(Parser& parser, Node* lhs);
+    Node* nud(Parser& parser);
 
+    void send(Visitor* visitor);
     const std::string& type() const;
   };
 }

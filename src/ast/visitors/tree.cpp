@@ -1,11 +1,6 @@
 #include "tree.h"
 
-#include "../identifier.h"
-#include "../bracket.h"
-#include "../node.h"
-#include "../number.h"
-#include "../operator.h"
-#include "../string.h"
+#include "../../ast.h"
 
 #include <iostream>
 
@@ -20,11 +15,6 @@ namespace AST
     std::cout << node->text() << '\n';
   }
 
-  void TreePrinter::visit(AST::Node* node) {
-    if(node == nullptr) return;
-    node->send(this);
-  }
-
   void TreePrinter::visit(AST::Binary* node) {
     print(node, mDepth);
 
@@ -34,11 +24,7 @@ namespace AST
     mDepth -= 1;
   }
 
-  void TreePrinter::visit(AST::Identifier* node) {
-    print(node, mDepth);
-  }
-
-  void TreePrinter::visit(AST::LBracket* node) {
+  void TreePrinter::visit(AST::Bracket* node) {
     print(node, mDepth);
 
     mDepth += 1;
@@ -47,7 +33,7 @@ namespace AST
     mDepth -= 1;
   }
 
-  void TreePrinter::visit(AST::Number* node) {
+  void TreePrinter::visit(AST::Node* node) {
     print(node, mDepth);
   }
 
@@ -57,9 +43,5 @@ namespace AST
     mDepth += 1;
     visit(node->rhs());
     mDepth -= 1;
-  }
-
-  void TreePrinter::visit(AST::String* node) {
-    print(node, mDepth);
   }
 }

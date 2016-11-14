@@ -11,12 +11,14 @@ class Trie {
 protected:
   const Operator* mBinary;
   const Operator* mPrefix;
+  const Operator* mSymbol;
   std::map<char, Trie*> mChildren;
 public:
   Trie();
 
   const Operator* binary() const;
   const Operator* prefix() const;
+  const Operator* symbol() const;
 
   void  add(Operator* op);
 

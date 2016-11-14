@@ -1,7 +1,9 @@
 #include "all.h"
 
 #include "../error.h"
-#include "../../ast/operator.h"
+#include "../../ast/binary.h"
+#include "../../ast/prefix.h"
+#include "../../ast/symbol.h"
 #include "../ops/operator.h"
 #include "../ops/trie.h"
 
@@ -9,6 +11,13 @@ void OperatorLexlet::lex(Lexer& lexer) const {
   const Trie* node = Operator::get(lexer);
   const Operator* binary = node->binary();
   const Operator* prefix = node->prefix();
+  const Operator* symbol = node->symbol();
+
+  if(symbol != nullptr) {
+    lexer << new AST::Symbol(lexer, symbol);;
+    lexer.clear(Lexer::FVALUE);
+    return;
+  }
 
   if(lexer.flags() & Lexer::FVALUE) {
     if(binary == nullptr) {

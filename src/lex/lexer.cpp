@@ -2,11 +2,11 @@
 
 #include "chars/all.h"
 #include "lexlets/all.h"
-#include "../ast/bracket.h"
+#include "../ast/symbol.h"
 
 // Keys are from Char::type(c):
 static const Lexlet* LEXLETS[9] = {
-  new BracketLexlet,
+  nullptr,
   new CommentLexlet,
   new SpaceLexlet,
   new IdentifierLexlet,
@@ -77,8 +77,6 @@ void Lexer::lex() {
   for(int c = peek(); c != EOF; c = peek()) {
     LEXLETS[Char::type(c)]->lex(*this);
   }
-
-  *this << new AST::RBracket(*this, "[-]");
 }
 
 int Lexer::line() const {

@@ -15,7 +15,7 @@ protected:
 public:
   Parser(std::vector<AST::Node*>& tokens);
 
-  AST::Node* parse(int rbp = 0);
+  AST::Node* parse(int rbp = 0, const char* eat = nullptr);
   AST::Node* peek() const;
   AST::Node* take();
   AST::Node* take(const std::string& text);

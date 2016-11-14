@@ -16,6 +16,8 @@ void IdentifierLexlet::lex(Lexer& lexer) const {
     text << (char) lexer.take();
   }
 
+  //TODO: Is it an operator?
+
   if(lexer.take('?')) {
     text << '?';
   }
