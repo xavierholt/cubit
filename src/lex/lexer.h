@@ -49,9 +49,11 @@ public:
   int  line()       const;
   int  peek()       const;
   bool peek(int c)  const;
+  bool spaced()     const;
   int  take();
   bool take(int c);
   void undo();
+  bool valued()     const;
 
   Lexer& operator << (AST::Node*);
 };

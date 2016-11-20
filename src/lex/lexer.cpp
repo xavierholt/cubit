@@ -111,6 +111,10 @@ int Lexer::take() {
   }
 }
 
+bool Lexer::spaced() {
+  return (mFlags & FSPACE);
+}
+
 bool Lexer::take(int c) {
   bool m = peek(c);
   if(m) take();
@@ -124,6 +128,10 @@ Tokens& Lexer::tokens() {
 void Lexer::undo() {
   mLatest -= 1;
   mColumn -= 1;
+}
+
+bool Lexer::valued() {
+  return (mFlags & FVALUE);
 }
 
 Lexer& Lexer::operator << (AST::Node* node) {

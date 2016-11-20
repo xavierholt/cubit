@@ -1,0 +1,25 @@
+% require_relative 'operators.rb'
+#include "all.h"
+
+#include "../error.h"
+#include "../../ast/binary.h"
+#include "../../ast/prefix.h"
+#include "../../ast/symbol.h"
+
+AST::Node* oplex(Lexer& lexer) {
+<%= switch(ROOT, 1) %>
+}
+
+void OperatorLexlet::lex(Lexer& lexer) const {
+  AST::Node* node = oplex(lexer);
+  // node->check_spacing(lexer);
+
+  // if(lexer.valued() && node->arity() == 1) {
+  //   // TODO:  Special case for parens?
+  //   // TODO:  Fix these numbers.
+  //   lexer << new LooseCall(lexer, "[call]", 90, 42);
+  // }
+
+  lexer << node;
+  lexer.clear();
+}

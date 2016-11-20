@@ -9,7 +9,7 @@ namespace AST
   }
 
   AST::Node* String::led(Parser& parser, AST::Node* lhs) {
-    throw ParseError(parser, "Unexpected value " + text());
+    throw ParseError(parser, "Unexpected string " + text());
   }
 
   AST::Node* String::nud(Parser& parser) {

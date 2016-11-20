@@ -5,7 +5,7 @@
 namespace AST
 {
   Number::Number(const Lexer& lexer, const std::string& text): Node(lexer, text) {
-    mValue = std::stoll(text.c_str());
+    // All done.
   }
 
   AST::Node* Number::led(Parser& parser, AST::Node* lhs) {

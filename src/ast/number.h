@@ -6,8 +6,6 @@
 namespace AST
 {
   class Number: public Node {
-  protected:
-    long long int mValue;
   public:
     Number(const Lexer& lexer, const std::string& text);
 
