@@ -18,12 +18,12 @@ void NewlineLexlet::lex(Lexer& lexer) const {
   if(c ==  EOF) return;
 
   if(dent > lexer.dent()) {
-    lexer << new AST::Binary(lexer, "[>]");
+    lexer << new AST::Binary(lexer, "[>]", 10);
     lexer.indent(dent);
     lexer.clear();
   }
   else if(dent == lexer.dent()) {
-    lexer << new AST::Binary(lexer, "[ ]");
+    lexer << new AST::Binary(lexer, "[ ]", 10);
     lexer.clear();
   }
   else {

@@ -28,7 +28,7 @@ namespace AST
 
     void  send(Visitor* visitor);
 
-    const std::string& text() const;
+    // const std::string& text() const;
     const std::string& type() const;
   };
 }

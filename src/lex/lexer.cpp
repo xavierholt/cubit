@@ -111,7 +111,7 @@ int Lexer::take() {
   }
 }
 
-bool Lexer::spaced() {
+bool Lexer::spaced() const {
   return (mFlags & FSPACE);
 }
 
@@ -130,7 +130,7 @@ void Lexer::undo() {
   mColumn -= 1;
 }
 
-bool Lexer::valued() {
+bool Lexer::valued() const {
   return (mFlags & FVALUE);
 }
 

@@ -1,6 +1,7 @@
 #include "all.h"
 
 #include "../error.h"
+#include "../chars/all.h"
 #include "../../ast/bracket.h"
 
 void BracketLexlet::lex(Lexer& lexer) const {

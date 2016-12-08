@@ -22,6 +22,10 @@ class Op
   end
 end
 
+def constant(type, *args)
+  #
+end
+
 p = 0
 # Enders:
 Op.new 0, :Symbol,    ")"
